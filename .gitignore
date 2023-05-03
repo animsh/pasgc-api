@@ -1,0 +1,15 @@
+# All local_settings
+**/local_settings.py
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Database
+*.sqlite3
+
+# Log files
+*.log
+
+# Virtual environment
+venv/
