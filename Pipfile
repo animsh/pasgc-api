@@ -10,6 +10,13 @@ djangorestframework-simplejwt = "*"
 djoser = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
+pandas = "*"
+numpy = "*"
+matplotlib = "*"
+seaborn = "*"
+streamlit = "*"
+scikit-learn = "*"
+xgboost = "*"
 
 [dev-packages]
 autopep8 = "*"
