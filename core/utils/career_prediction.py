@@ -276,12 +276,14 @@ def inputlist(Name, Contact_Number, Email_address,
 
     t = Afeed+feed
     # print("t", t)
-    output = regressor1.predict([t])
-    output += regressor2.predict([t])
-    output += regressor3.predict([t])
+    career_list = [regressor1.predict([t]), regressor2.predict([
+        t]), regressor3.predict([t])]
+    # output = regressor1.predict([t])
+    # output += regressor2.predict([t])
+    # output += regressor3.predict([t])
     # output += regressor4.predict([feed])
 
-    return (output)
+    return (career_list)
 
 
 # Name = "Rajesh"

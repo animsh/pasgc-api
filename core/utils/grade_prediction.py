@@ -140,19 +140,33 @@ def predict_grade(filename):
     max_marks = 70
 
     # Rescale the predicted value to the range of 0 to max_marks
-    predicted_marks = predictions[0] * (max_marks/100)
-    predicted_marks1 = predictions1[0] * (max_marks/100)
-    predicted_marks2 = predictions2[0] * (max_marks/100)
-    predicted_marks3 = predictions3[0] * (max_marks/100)
-    predicted_marks4 = predictions4[0] * (max_marks/100)
-    predicted_marks5 = predictions5[0] * (max_marks/100)
+
+    updated_values_for_one = [round(value * (max_marks/100))
+                              for value in predictions]
+    updated_values_for_two = [round(value * (max_marks/100))
+                              for value in predictions1]
+    updated_values_for_three = [
+        round(value * (max_marks/100)) for value in predictions2]
+    updated_values_for_four = [round(value * (max_marks/100))
+                               for value in predictions3]
+    updated_values_for_five = [round(value * (max_marks/100))
+                               for value in predictions4]
+    updated_values_for_six = [round(value * (max_marks/100))
+                              for value in predictions5]
+
+    # predicted_marks = predictions[0] * (max_marks/100)
+    # predicted_marks1 = predictions1[0] * (max_marks/100)
+    # predicted_marks2 = predictions2[0] * (max_marks/100)
+    # predicted_marks3 = predictions3[0] * (max_marks/100)
+    # predicted_marks4 = predictions4[0] * (max_marks/100)
+    # predicted_marks5 = predictions5[0] * (max_marks/100)
     # Round the predicted value to the nearest integer
-    predicted_marks = round(predicted_marks)
-    predicted_marks1 = round(predicted_marks1)
-    predicted_marks2 = round(predicted_marks2)
-    predicted_marks3 = round(predicted_marks3)
-    predicted_marks4 = round(predicted_marks4)
-    predicted_marks5 = round(predicted_marks5)
+    # predicted_marks = round(predicted_marks)
+    # predicted_marks1 = round(predicted_marks1)
+    # predicted_marks2 = round(predicted_marks2)
+    # predicted_marks3 = round(predicted_marks3)
+    # predicted_marks4 = round(predicted_marks4)
+    # predicted_marks5 = round(predicted_marks5)
 
     # # Display the rescaled predicted value
     # print("The predicted end sem marks is:", predicted_marks)
@@ -161,5 +175,6 @@ def predict_grade(filename):
     # print("The predicted end sem marks is:", predicted_marks3)
     # print("The predicted end sem marks is:", predicted_marks4)
     # print("The predicted end sem marks is:", predicted_marks5)
-
-    return predicted_marks, predicted_marks1, predicted_marks2, predicted_marks3, predicted_marks4, predicted_marks5
+    # return predictions, predictions1, predictions2, predictions3, predictions4, predictions5
+    # return predicted_marks, predicted_marks1, predicted_marks2, predicted_marks3, predicted_marks4, predicted_marks5
+    return updated_values_for_one, updated_values_for_two, updated_values_for_three, updated_values_for_four, updated_values_for_five, updated_values_for_six
