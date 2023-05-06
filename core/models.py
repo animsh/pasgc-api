@@ -78,7 +78,7 @@ class UserGradeAnalysisData(models.Model):
     go_out = models.IntegerField()
     health = models.IntegerField()
     absences = models.IntegerField()
-    mid_sem_marks = models.IntegerField()
+    mid_sem_marks = models.CharField(max_length=255)
     end_sem_marks = models.IntegerField(blank=True, null=True)
     attendance_rate = models.IntegerField()
     class_participation = models.IntegerField()
