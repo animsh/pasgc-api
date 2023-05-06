@@ -8,16 +8,16 @@ import pickle
 import time
 import streamlit as st
 
-pickleFile = open("core\\utils\\weights.pkl", "rb")
+pickleFile = open("core\\utils\\models_career\\weights.pkl", "rb")
 regressor1 = pickle.load(pickleFile)  # our model
 
-pickleFile = open("core\\utils\\weights1.pkl", "rb")
+pickleFile = open("core\\utils\\models_career\\weights1.pkl", "rb")
 regressor2 = pickle.load(pickleFile)  # our model
 
-pickleFile = open("core\\utils\\weights2.pkl", "rb")
+pickleFile = open("core\\utils\\models_career\\weights2.pkl", "rb")
 regressor3 = pickle.load(pickleFile)  # our model
 
-pickleFile = open("core\\utils\\weights3.pkl", "rb")
+pickleFile = open("core\\utils\\models_career\\weights3.pkl", "rb")
 regressor4 = pickle.load(pickleFile)  # our model
 
 # **2. Loading Dataset**

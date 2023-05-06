@@ -106,7 +106,7 @@ class UserGradeAnalysisData(models.Model):
     semester = models.IntegerField()
 
     def __str__(self):
-        return self.enrollment_number
+        return self.user.name
 
 
 class UserCareerAnalysisData(models.Model):

@@ -6,6 +6,7 @@ from .models import UserGradeAnalysisData, UserCareerAnalysisData
 from rest_framework.response import Response
 from rest_framework import status
 from .utils.career_prediction import inputlist
+from .utils.grade_prediction import convert_to_csv, predict_grade
 
 
 class UserGradeAnalysisDataListView(ListCreateAPIView):
@@ -39,6 +40,23 @@ class UserGradeAnalysisResultView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserGradeAnalysisDataSerializer
     queryset = UserGradeAnalysisData.objects.all()
     lookup_field = 'enrollment_number'
+
+    def get(self, request, *args, **kwargs):
+        if kwargs.get('enrollment_number') != request.user.enrollment_number:
+            return Response({'error': 'You are not authorized to view this data.'}, status=status.HTTP_403_FORBIDDEN)
+
+        # print(kwargs.get('enrollment_number'))
+        gradeData = UserGradeAnalysisData.objects.filter(
+            enrollment_number=kwargs.get('enrollment_number')).first()
+
+        # print(UserGradeAnalysisData.objects.all())
+
+        if not gradeData:
+            return Response({'error': 'No data found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        name = convert_to_csv(gradeData)
+        first, second, third, fourth, fifth, sixth = predict_grade(name)
+        return Response({'message': 'CSV file generated successfully.'}, status=status.HTTP_200_OK)
 
 
 class UserCareerAnalysisResultView(RetrieveUpdateDestroyAPIView):
