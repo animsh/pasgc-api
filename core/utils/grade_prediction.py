@@ -13,11 +13,12 @@ def convert_to_csv(row):
 
     subjects = row.subjects.split(',')
     subjects_codes = row.subjects_codes.split(',')
+    mid_sem_marks = row.mid_sem_marks.split(',')
 
     with open(csv_filename, mode='w+', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(headers)
-        for subject, subject_code in zip(subjects, subjects_codes):
+        for subject, subject_code, mid_sem_mark in zip(subjects, subjects_codes, mid_sem_marks):
             writer.writerow([
                 row.user.name,
                 row.enrollment_number,
@@ -46,7 +47,7 @@ def convert_to_csv(row):
                 row.go_out,
                 row.health,
                 row.absences,
-                row.mid_sem_marks,
+                mid_sem_mark,
                 row.end_sem_marks,
                 row.attendance_rate,
                 row.class_participation,
@@ -93,32 +94,26 @@ def predict_grade(filename):
     stud = pd.read_csv(filename)
     from sklearn.preprocessing import LabelEncoder
     le = LabelEncoder()
-    stud.iloc[:, 0] = le.fit_transform(stud.iloc[:, 0])
-    stud.iloc[:, 1] = le.fit_transform(stud.iloc[:, 1])
-    stud.iloc[:, 3] = le.fit_transform(stud.iloc[:, 3])
-    stud.iloc[:, 4] = le.fit_transform(stud.iloc[:, 4])
-    stud.iloc[:, 5] = le.fit_transform(stud.iloc[:, 5])
-    stud.iloc[:, 8] = le.fit_transform(stud.iloc[:, 8])
-    stud.iloc[:, 9] = le.fit_transform(stud.iloc[:, 9])
-    stud.iloc[:, 10] = le.fit_transform(stud.iloc[:, 10])
-    stud.iloc[:, 11] = le.fit_transform(stud.iloc[:, 11])
-    stud.iloc[:, 15] = le.fit_transform(stud.iloc[:, 15])
-    stud.iloc[:, 16] = le.fit_transform(stud.iloc[:, 16])
-    stud.iloc[:, 17] = le.fit_transform(stud.iloc[:, 17])
-    stud.iloc[:, 18] = le.fit_transform(stud.iloc[:, 18])
-    stud.iloc[:, 19] = le.fit_transform(stud.iloc[:, 19])
-    stud.iloc[:, 20] = le.fit_transform(stud.iloc[:, 20])
-    stud.iloc[:, 21] = le.fit_transform(stud.iloc[:, 21])
-    stud.iloc[:, 22] = le.fit_transform(stud.iloc[:, 22])
-    stud = stud.drop(['mid sem marks'], axis='columns')
+    for col in stud.select_dtypes(include=['object']).columns:
+        stud[col] = le.fit_transform(stud[col].astype(str))
+    # stud = stud.drop(['mid sem marks'], axis='columns')
+
+    # Find correlations with the Grade
+    most_correlated = stud.corr().abs(
+    )['end sem marks'].sort_values(ascending=False)
+
+    # Maintain the top 8 most correlation features with Grade
+    # most_correlated = most_correlated[:9]
+    most_correlatedstud = stud.loc[:, most_correlated.index]
+    stud.head()
 
     stud = stud.drop('end sem marks', axis=1)
 
     # Make predictions using the loaded model
     # print(stud.columns)
     # Create a list of column names in the desired order
-    desired_order = ['classroom environment', 'address', 'fjob', 'school support', 'semester', 'higher', 'teacher-student relationship', 'mjob', 'teacher quality', 'freetime', 'failures', 'fedu', 'subject interest', 'self-discipline', 'parental involvement', 'time spent on extracurricular activities', 'workload', 'age', 'medu', 'absences', 'health', 'learning resources',
-                     'family support', 'mental health', 'name', 'time management', 'goal setting', 'family size', 'attendance rate', 'group study', 'extra activities', 'time spent on homework', 'stress levels', 'traveltime', 'internet', 'studytime', 'motivation', 'test preparation', 'peer influence', 'family relationship', 'nursery', 'reason', 'enrollment number', 'class participation', 'goout']
+    desired_order = ['classroom environment', 'address', 'fjob', 'school support', 'semester', 'higher', 'teacher-student relationship', 'mjob', 'teacher quality', 'freetime', 'failures', 'fedu', 'subject interest', 'self-discipline', 'parental involvement', 'time spent on extracurricular activities', 'workload', 'degree', 'sex', 'guardian', 'age', 'medu', 'absences', 'health', 'learning resources', 'family support', 'mental health',
+                     'name', 'time management', 'goal setting', 'family size', 'parental cohabitation status', 'attendance rate', 'group study', 'extra activities', 'time spent on homework', 'stress levels', 'traveltime', 'internet', 'studytime', 'motivation', 'test preparation', 'peer influence', 'family relationship', 'nursery', 'reason', 'mid sem marks', 'subject code', 'enrollment number', 'subject', 'class participation', 'goout']
 
     # Create a new DataFrame with columns in the desired order
     df_new = stud[desired_order]
