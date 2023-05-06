@@ -28,13 +28,13 @@ df.head()
 df['workshops'] = df['workshops'].replace(['testing'], 'Testing')
 df.head()
 
-print(df.columns.unique)
+# print(df.columns.unique)
 
 n = df['Suggested Job Role'].unique()
-print(len(n))
+# print(len(n))
 
-print('The shape of our training set: %s professionals and %s features' %
-      (df.shape[0], df.shape[1]))
+# print('The shape of our training set: %s professionals and %s features' %
+#       (df.shape[0], df.shape[1]))
 
 
 # **5. Feature Engineering**
@@ -47,18 +47,18 @@ newdf.head(10)
 cols = df[["self-learning capability?", "Extra-courses did",
            "Taken inputs from seniors or elders", "worked in teams ever?", "Introvert"]]
 for i in cols:
-    print(i)
+    # print(i)
     cleanup_nums = {i: {"yes": 1, "no": 0}}
     df = df.replace(cleanup_nums)
 
-print("\n\nList of Categorical features: \n",
-      df.select_dtypes(include=['object']).columns.tolist())
+# print("\n\nList of Categorical features: \n",
+#       df.select_dtypes(include=['object']).columns.tolist())
 
 # (b) Number Encoding for Categorical
 
 mycol = df[["reading and writing skills", "memory capability score"]]
 for i in mycol:
-    print(i)
+    # print(i)
     cleanup_nums = {i: {"poor": 0, "medium": 1, "excellent": 2}}
     df = df.replace(cleanup_nums)
 
@@ -68,13 +68,13 @@ for i in category_cols:
     df[i] = df[i].astype('category')
     df[i + "_code"] = df[i].cat.codes
 
-print("\n\nList of Categorical features: \n",
-      df.select_dtypes(include=['object']).columns.tolist())
+# print("\n\nList of Categorical features: \n",
+#       df.select_dtypes(include=['object']).columns.tolist())
 
 # (c) Dummy Variable Encoding
 
-print(df['Management or Technical'].unique())
-print(df['hard/smart worker'].unique())
+# print(df['Management or Technical'].unique())
+# print(df['hard/smart worker'].unique())
 
 df = pd.get_dummies(
     df, columns=["Management or Technical", "hard/smart worker"], prefix=["A", "B"])
@@ -82,8 +82,8 @@ df.head()
 
 df.sort_values(by=['certifications'])
 
-print("List of Numerical features: \n", df.select_dtypes(
-    include=np.number).columns.tolist())
+# print("List of Numerical features: \n", df.select_dtypes(
+#     include=np.number).columns.tolist())
 
 
 category_cols = df[['certifications', 'workshops', 'Interested subjects',
@@ -92,48 +92,48 @@ for i in category_cols:
     print(i)
 
 Certifi = list(df['certifications'].unique())
-print(Certifi)
+# print(Certifi)
 certi_code = list(df['certifications_code'].unique())
-print(certi_code)
+# print(certi_code)
 
 Workshops = list(df['workshops'].unique())
-print(Workshops)
+# print(Workshops)
 Workshops_code = list(df['workshops_code'].unique())
-print(Workshops_code)
+# print(Workshops_code)
 
 Certi_l = list(df['certifications'].unique())
 certi_code = list(df['certifications_code'].unique())
 C = dict(zip(Certi_l, certi_code))
 
 Workshops = list(df['workshops'].unique())
-print(Workshops)
+# print(Workshops)
 Workshops_code = list(df['workshops_code'].unique())
-print(Workshops_code)
+# print(Workshops_code)
 W = dict(zip(Workshops, Workshops_code))
 
 Interested_subjects = list(df['Interested subjects'].unique())
-print(Interested_subjects)
+# print(Interested_subjects)
 Interested_subjects_code = list(df['Interested subjects_code'].unique())
 ISC = dict(zip(Interested_subjects, Interested_subjects_code))
 
 interested_career_area = list(df['interested career area '].unique())
-print(interested_career_area)
+# print(interested_career_area)
 interested_career_area_code = list(df['interested career area _code'].unique())
 ICA = dict(zip(interested_career_area, interested_career_area_code))
 
 Typeofcompany = list(df['Type of company want to settle in?'].unique())
-print(Typeofcompany)
+# print(Typeofcompany)
 Typeofcompany_code = list(
     df['Type of company want to settle in?_code'].unique())
 TOCO = dict(zip(Typeofcompany, Typeofcompany_code))
 
 Interested_Books = list(df['Interested Type of Books'].unique())
-print(Interested_subjects)
+# print(Interested_subjects)
 Interested_Books_code = list(df['Interested Type of Books_code'].unique())
 IB = dict(zip(Interested_Books, Interested_Books_code))
 
 Range_dict = {"poor": 0, "medium": 1, "excellent": 2}
-print(Range_dict)
+# print(Range_dict)
 
 
 A = 'yes'
@@ -142,7 +142,7 @@ col = [A, B]
 for i in col:
     if (i == 'yes'):
         i = 1
-    print(i)
+    # print(i)
 
 
 f = []
@@ -153,11 +153,11 @@ for i in clms:
         if (i == key):
             i = C[key]
             f.append(i)
-print(f)
+# print(f)
 
 C = dict(zip(Certifi, certi_code))
 
-print(C)
+# print(C)
 
 array = np.array([1, 2, 3, 4])
 array.reshape(-1, 1)
@@ -185,13 +185,13 @@ def inputlist(Name, Contact_Number, Email_address,
             j = 2
             feed.append(j)
 
-            print("feed 1", i)
+            # print("feed 1", i)
 
         elif (i == "No"):
             j = 3
             feed.append(j)
 
-            print("feed 2", j)
+            # print("feed 2", j)
 
         elif (i == 'Management'):
             j = 1
@@ -199,7 +199,7 @@ def inputlist(Name, Contact_Number, Email_address,
             feed.append(j)
             feed.append(K)
 
-            print("feed 10,11", i, j, k)
+            # print("feed 10,11", i, j, k)
 
         elif (i == 'Technical'):
             j = 0
@@ -207,7 +207,7 @@ def inputlist(Name, Contact_Number, Email_address,
             feed.append(j)
             feed.append(K)
 
-            print("feed 12,13", i, j, k)
+            # print("feed 12,13", i, j, k)
 
         elif (i == 'Smart worker'):
             j = 1
@@ -215,14 +215,14 @@ def inputlist(Name, Contact_Number, Email_address,
             feed.append(j)
             feed.append(K)
 
-            print("feed 14,15", i, j, k)
+            # print("feed 14,15", i, j, k)
 
         elif (i == 'Hard Worker'):
             j = 0
             k = 1
             feed.append(j)
             feed.append(K)
-            print("feed 16,17", i, j, k)
+            # print("feed 16,17", i, j, k)
 
         else:
             for key in Range_dict:
@@ -230,52 +230,52 @@ def inputlist(Name, Contact_Number, Email_address,
                     j = Range_dict[key]
                     feed.append(j)
 
-                    print("feed 3", i, j)
+                    # print("feed 3", i, j)
 
             for key in C:
                 if (i == key):
                     j = C[key]
                     feed.append(j)
 
-                    print("feed 4", i, j)
+                    # print("feed 4", i, j)
 
             for key in W:
                 if (i == key):
                     j = W[key]
                     feed.append(j)
 
-                    print("feed 5", i, j)
+                    # print("feed 5", i, j)
 
             for key in ISC:
                 if (i == key):
                     j = ISC[key]
                     feed.append(j)
 
-                    print("feed 6", i, j)
+                    # print("feed 6", i, j)
 
             for key in ICA:
                 if (i == key):
                     j = ICA[key]
                     feed.append(j)
 
-                    print("feed 7", i, j)
+                    # print("feed 7", i, j)
 
             for key in TOCO:
                 if (i == key):
                     j = TOCO[key]
                     feed.append(j)
 
-                    print("feed 8", i, j)
+                    # print("feed 8", i, j)
 
             for key in IB:
                 if (i == key):
                     j = IB[key]
                     feed.append(j)
 
-                    print("feed 9", i, j)
+                    # print("feed 9", i, j)
 
     t = Afeed+feed
-    print("t", t)
+    # print("t", t)
     output = regressor1.predict([t])
     output += regressor2.predict([t])
     output += regressor3.predict([t])
