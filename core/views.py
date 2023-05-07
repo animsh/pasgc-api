@@ -35,7 +35,10 @@ class UserGradeAnalysisDataListView(ListCreateAPIView):
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        updateRequest = request
+        updateRequest.data['user_id'] = request.user.id
+        updateRequest.data['enrollment_number'] = request.user.enrollment_number
+        serializer = self.get_serializer(data=updateRequest.data)
         try:
             serializer.is_valid(raise_exception=True)
         except ValidationError as e:
@@ -133,7 +136,10 @@ class UserGradeAnalysisDataView(CreateAPIView, RetrieveUpdateDestroyAPIView):
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        updateRequest = request
+        updateRequest.data['user_id'] = request.user.id
+        updateRequest.data['enrollment_number'] = request.user.enrollment_number
+        serializer = self.get_serializer(data=updateRequest.data)
         try:
             serializer.is_valid(raise_exception=True)
         except ValidationError as e:
@@ -155,8 +161,11 @@ class UserGradeAnalysisDataView(CreateAPIView, RetrieveUpdateDestroyAPIView):
     def put(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
+        updateRequest = request
+        updateRequest.data['user_id'] = request.user.id
+        updateRequest.data['enrollment_number'] = request.user.enrollment_number
         serializer = self.get_serializer(
-            instance, data=request.data, partial=partial)
+            instance, data=updateRequest.data, partial=partial)
         try:
             serializer.is_valid(raise_exception=True)
         except ValidationError as e:

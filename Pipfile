@@ -17,6 +17,7 @@ seaborn = "*"
 streamlit = "*"
 scikit-learn = "*"
 xgboost = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"
