@@ -77,7 +77,7 @@ def convert_to_csv(row):
                 row.semester
             ])
 
-    return csv_filename
+    return csv_filename, subjects
 
 
 def predict_grade(filename):

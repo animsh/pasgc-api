@@ -458,7 +458,7 @@ class UserGradeAnalysisResultView(RetrieveUpdateDestroyAPIView):
                 "message": "No data found.",
             }, status=status.HTTP_404_NOT_FOUND)
 
-        name = convert_to_csv(gradeData)
+        name, subjects = convert_to_csv(gradeData)
         first, second, third, fourth, fifth, sixth = predict_grade(name)
 
         response_data = {
@@ -470,7 +470,8 @@ class UserGradeAnalysisResultView(RetrieveUpdateDestroyAPIView):
                 'third': third,
                 'fourth': fourth,
                 'fifth': fifth,
-                'sixth': sixth
+                'sixth': sixth,
+                'subjects': subjects
             }
         }
         return Response(response_data, status=status.HTTP_200_OK)
