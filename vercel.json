@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
       {
-        "src": "pasgc/wsgi.py",
+        "src": "manage.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "pasgc/wsgi.py"
+        "dest": "manage.py"
       }
     ]
   }
