@@ -1,6 +1,8 @@
 # All local_settings
 **/local_settings.py
 
+.env
+
 # Python bytecode
 __pycache__/
 *.pyc
